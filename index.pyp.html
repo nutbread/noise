@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="description" content="Templated CPU implementation of simplex noise for C++" />
+	<meta name="keywords" content="simplex noise,noise,perlin,cpu,c++,templated" />
+	<meta name="author" content="nutbread" />
+	<title>Simplex Noise Library</title>
+	<link rel="shortcut icon" href="favicon.png" />
+	<link rel="stylesheet" href="style.css" />
+	<script src="script.js"></script>
+</head>
+<body>
+
+
+<div class="header_bar">
+	<div class="main main_no_overflow header">
+
+		<table class="header_table"><tbody>
+			<tr>
+				<td class="header_table_cell">
+					<div class="header_table_name">
+						<a class="header_table_name_user link_external link_author light_underline" href="https://nutbread.github.io/"><span>nutbread</span></a><span class="header_table_name_separator">/</span><a href="" class="header_table_name_title link_external link_title light_underline"><span>noise</span></a>
+					</div>
+				</td>
+				<td class="header_table_cell">
+					<div class="header_table_separator"></div>
+				</td>
+				<td class="header_table_cell header_table_cell_full">
+					<div class="header_table_description">
+						<div class="header_table_description_name">Simplex Noise Library</div>
+						<div class="header_table_description_body">Templated CPU implementation of simplex noise</div>
+					</div>
+				</td>
+				<td class="header_table_cell">
+					<a class="header_table_view_on_github link_external link_view_on_github light_nohover_color_hover" href="https://github.com/nutbread/noise">
+						<div class="header_table_view_on_github_line1">view on</div>
+						<div class="header_table_view_on_github_line2">github</div>
+					</a>
+				</td>
+			</tr>
+		</tbody></table>
+
+	</div>
+</div>
+<div class="main body">
+
+	<h1 id="about"><span class="hardlink_text">About<a class="hardlink" href="#about"></a></span></h1>
+	<p>
+		A C++11 implementation of simplex noise on the CPU, created for the purposes of learning and expanding.
+	</p>
+
+	<h1 id="download"><span class="hardlink_text">Download<a class="hardlink" href="#download"></a></span></h1>
+	<p>
+		The source for this library comes in 3 separate files: a header, a implementation file for templated functions,
+		and an implementation file for non-templated functions.
+	</p>
+	<p>
+		<ul>
+			<li>
+				<a class="link_codebase_raw light_underline" href="https://raw.githubusercontent.com/nutbread/noise/master/src/SimplexNoise.hpp" target="_blank"><span>SimplexNoise.hpp</span></a> &ndash; The primary header file
+			</li>
+			<li>
+				<a class="link_codebase_raw light_underline" href="https://raw.githubusercontent.com/nutbread/noise/master/src/SimplexNoise.t.hpp" target="_blank"><span>SimplexNoise.t.hpp</span></a> &ndash; The template implementation source
+			</li>
+			<li>
+				<a class="link_codebase_raw light_underline" href="https://raw.githubusercontent.com/nutbread/noise/master/src/SimplexNoise.cpp" target="_blank"><span>SimplexNoise.cpp</span></a> &ndash; Non-templated implementation source
+			</li>
+		</ul>
+	</p>
+
+	<h1 id="features"><span class="hardlink_text">Features<a class="hardlink" href="#features"></a></span></h1>
+	<p>
+		<ul>
+			<li>
+				<strong>Templating</strong><br />
+				This implementation is highly templated, meaning that both <code>float</code>s and
+				<code>double</code>s can be used without rewriting code.
+			</li>
+			<li>
+				<strong>Octaves</strong><br />
+				Simple octave code is included. This can be used as-is, or be modified to have
+				more complex options and outputs.
+			</li>
+			<li>
+				<strong>1, 2, 3, and 4 dimensional noise</strong><br />
+				Hardcoded functions for 1 through 4 dimensional noise, the more commonly used
+				noise functions that provide acceptable visual quality.
+			</li>
+			<li>
+				<strong>Generic n-dimensional noise</strong><br />
+				A function for any n-dimensional noise. While the gradients generated might not
+				be as uniform as the fixed permutation table implementations, it still provides
+				acceptable results for basic testing.
+			</li>
+			<li>
+				<strong>First order partial derivatives</strong><br />
+				All noise functions for dimensions 1 through 4 provide overloaded functions for
+				returning the partial derivatives of the function at the given input point.
+			</li>
+			<li>
+				<strong>Custom permutation table</strong><br />
+				A custom permutation table can be input into a noise generating instance. This
+				functions like a random number generator seed and changes the order the gradients
+				will appear in.
+			</li>
+		</ul>
+	</p>
+
+<?
+import doc_writer;
+content = [];
+doc_writer.process_doc(u"documentation.docpy", (lambda s: content.append(s)));
+for c in content:
+	pyp.write(unicode(c).encode(u"utf-8"));
+?>
+
+	<h1 id="executables"><span class="hardlink_text">Executables<a class="hardlink" href="#executables"></a></span></h1>
+	<p>
+		Source codes and binarys for 3 executables are included in this project. They are used for
+		testing various functions and brute-force solving noise function minimum/maximums.
+	</p>
+
+	<h4 id="test.exe"><span class="hardlink_text">test.exe<a class="hardlink" href="#test.exe"></a></span></h4>
+	<p>
+		<a class="link_codebase_raw light_underline" href="https://raw.githubusercontent.com/nutbread/noise/master/test/test.exe" target="_blank"><span>test.exe</span></a> is an application to test the 1 through 4 dimensional noise functions,
+		writing the output to a <a class="link_underline" href="https://en.wikipedia.org/wiki/Netpbm_format" target="_blank"><span><code>.pgm</code> image</span></a>. It has the following command line syntax:
+	</p>
+	<p>
+		<div class="codeblock"><strong>test.exe</strong> filename width height scale dimensions octaves derivative</div>
+	</p>
+	<p>
+		<ul>
+			<li>
+				<code><strong>filename</strong></code> &ndash; the output filename of the <code>.pgm</code> file
+			</li>
+			<li>
+				<code><strong>width</strong></code> &ndash; the width of the output file, in pixels
+			</li>
+			<li>
+				<code><strong>height</strong></code> &ndash; the height of the output file, in pixels
+			</li>
+			<li>
+				<code><strong>scale</strong></code> &ndash; the scaling factor for the noise function coordinates
+			</li>
+			<li>
+				<code><strong>dimensions</strong></code> &ndash; the dimensions of the function to test.<br />
+				Can be <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code>.
+			</li>
+			<li>
+				<code><strong>octaves</strong></code> &ndash; number of octaves to use
+			</li>
+			<li>
+				<code><strong>derivative</strong></code> &ndash; the number of the derivative to output.<br />
+				<code>0</code> outputs the noise function itself.<br />
+				<code>1</code> outputs the first partial derivative.<br />
+				etc...
+			</li>
+		</ul>
+	</p>
+
+	<h4 id="demo.exe"><span class="hardlink_text">demo.exe<a class="hardlink" href="#demo.exe"></a></span></h4>
+	<p>
+		<a class="link_codebase_raw light_underline" href="https://raw.githubusercontent.com/nutbread/noise/master/demo/demo.exe" target="_blank"><span>demo.exe</span></a> is an application to test the generic <code>noise_n</code> function,
+		writing the output to a <a class="link_underline" href="https://en.wikipedia.org/wiki/Netpbm_format" target="_blank"><span><code>.pgm</code> image</span></a>. It has the following command line syntax:
+	</p>
+	<p>
+		<div class="codeblock"><strong>demo.exe</strong> filename mode norm_mode x y width height scale max_radius power dimensions octaves [x y z w ...]</div>
+	</p>
+	<p>
+		<ul>
+			<li>
+				<code><strong>filename</strong></code> &ndash; the output filename of the <code>.pgm</code> file.<br />
+				If set to <code>"-"</code>, it will output to <code>stdout</code>.
+			</li>
+			<li>
+				<code><strong>mode</strong></code> &ndash; pgm output mode; either <code>binary</code> or <code>ascii</code>.
+			</li>
+			<li>
+				<code><strong>norm_mode</strong></code> &ndash; normalization mode of the noise values.<br />
+				<code>centered</code> will normalize around <code>0</code>.<br />
+				<code>full</code> will normalize to the range <code>[0, 1]</code> regardless of where the center is.<br />
+				<span class="light">The differences between these two will often be marginal.</span>
+			</li>
+			<li>
+				<code><strong>width</strong></code> &ndash; the width of the output file, in pixels
+			</li>
+			<li>
+				<code><strong>height</strong></code> &ndash; the height of the output file, in pixels
+			</li>
+			<li>
+				<code><strong>scale</strong></code> &ndash; the scaling factor for the noise function coordinates
+			</li>
+			<li>
+				<code><strong>max_radius</strong></code> &ndash; the maximum distance squared from a simplex point that a contribution can be non-zero
+			</li>
+			<li>
+				<code><strong>power</strong></code> &ndash; the exponent of the noise function's point contributions
+			</li>
+			<li>
+				<code><strong>dimensions</strong></code> &ndash; the dimensions of the function to test.
+			</li>
+			<li>
+				<code><strong>octaves</strong></code> &ndash; number of octaves to use
+			</li>
+			<li>
+				<code>[<strong>x</strong>, <strong>y</strong>, <strong>z</strong>, <strong>w</strong>, <strong>...</strong>]</code> &ndash; Optional starting values for the first coordinate.<br />
+				If omitted, they default to <code>0</code>.
+			</li>
+		</ul>
+	</p>
+
+	<h4 id="solver.exe"><span class="hardlink_text">solver.exe<a class="hardlink" href="#solver.exe"></a></span></h4>
+	<p>
+		<a class="link_codebase_raw light_underline" href="https://raw.githubusercontent.com/nutbread/noise/master/solver/solver.exe" target="_blank"><span>solver.exe</span></a> is an application to brute-force compute the maximum/minimum values of a noise
+		function. It does this by selecting permutations of gradients and iterating over the points of a simplex, computing the
+		noise function at each point.
+	</p>
+	<p>
+		This takes very long for the 4d case, but the minimum/maximum values will converge to a good approximation in a reasonable
+		amount of time. Therefore, the execution can be interrupted to get a good approximate value.
+	</p>
+	<p>
+		<div class="codeblock"><strong>solver.exe</strong> show_every threads dimensions sample_points sample_points_large</div>
+	</p>
+	<p>
+		<ul>
+			<li>
+				<code><strong>show_every</strong></code> &ndash; show output from every computation iteration.<br />
+				If <code>true</code>, output is shown for each step. If <code>false</code>, output is only displayed
+				when a minimum/maximum update occurs.
+			</li>
+			<li>
+				<code><strong>threads</strong></code> &ndash; number of threads to use.<br />
+				If set to <code>0</code>, it automatically uses the number of cores on the system.
+			</li>
+			<li>
+				<code><strong>dimensions</strong></code> &ndash; number of dimensions to test for.<br />
+				This will typically be <code>2</code>, <code>3</code>, or <code>4</code>.
+			</li>
+			<li>
+				<code><strong>sample_points</strong></code> &ndash; order of the number of points to sample.<br />
+				This is essentially the number of sample points along a single edge of a simplex.
+			</li>
+			<li>
+				<code><strong>sample_points_large</strong></code> &ndash; order of the number of points to sample when a minimum/maximum update occurs.<br />
+				When a minimum/maximum is updated, the same permutation of gradients is tested with a higher precision
+				point density.
+			</li>
+		</ul>
+	</p>
+
+</div>
+
+
+</body>
+</html>
+

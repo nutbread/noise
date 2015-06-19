@@ -1,0 +1,469 @@
+\h1 Documentation \id=Documentation
+
+
+\p
+	The following functions are available in the <code>SimplexNoise</code> API. Note that
+	many of the noise functions are very similar, usually just adding an additional point
+	component to the argument list, additional derivative output, or an octaves parameter.
+
+\p
+	The extended descriptions are minimized by default for ease of locating functions by name.
+	Click the <strong>+</strong>/<strong>−</strong> or the function name to expand/shrink the description.
+	<span class="script_enabled">
+		(<a class="light_underline" id="doc_expand_all"><span>expand all</span></a> |
+		<a class="light_underline" id="doc_shrink_all"><span>shrink all</span></a>)
+	</span>
+
+
+\h4 SimplexNoise class \id=SimplexNoise
+
+
+\p
+	The SimplexNoise class is the primary noise generation class. Once instantiated,
+	it can have its noise functions called to generate noise.
+
+
+\member HashInt
+	\obj SimplexNoise
+	\obj_template Float
+	\static
+	\type typedef
+	\desc The integer type used for integer hashing of points
+
+
+\member OctavesInt
+	\obj SimplexNoise
+	\obj_template Float
+	\static
+	\type typedef
+	\desc The integer type used for octave values
+
+
+\fn SimplexNoise
+	\template Float \type=typename \desc=The floating point type to use
+	\desc
+		Creates a new <code>SimplexNoise&lt;Float&gt;</code> instance using the
+		default permutation table.
+
+
+\fn SimplexNoise
+	\template Float \type=typename \desc=The floating point type to use
+	\arg perm
+		\type const unsigned char*
+		\desc A custom permutation table to use for gradient generation.
+			The length of this array should be 512, and consist of the values 0-256
+			in any order, looped twice.
+	\desc
+		Creates a new <code>SimplexNoise&lt;Float&gt;</code> instance using the
+		default permutation table.
+
+
+\fn ~SimplexNoise
+	\template Float
+	\desc
+		Destructor for a <code>SimplexNoise&lt;Float&gt;</code> instance. Note that
+		this does <strong>not</strong> delete any permutation tables, even if a custom
+		table was specified.
+
+
+\fn fast_floor
+	\template Integer \type=typename \desc=The integer type to cast to
+	\obj SimplexNoise
+	\obj_template Float
+	\static
+	\return Integer
+		\desc The floor'd value of the input as an <code>Integer</code> type
+	\arg x
+		\type Float
+		\desc The decimal value to floor
+
+
+\fn fast_ceiling
+	\template Integer \type=typename \desc=The integer type to cast to
+	\obj SimplexNoise
+	\obj_template Float
+	\static
+	\return Integer
+		\desc The ceiling'd value of the input as an <code>Integer</code> type
+	\arg x
+		\type Float
+		\desc The decimal value to ceiling
+
+
+\fn noise1
+	\obj SimplexNoise
+	\obj_template Float
+	\desc Computes a 1-dimensional noise function at a given 1d point.
+	\return Float
+		\desc The computed noise function at the input point
+	\arg x
+		\type Float
+		\desc The point to compute the noise function at
+
+
+\fn noise1
+	\obj SimplexNoise
+	\obj_template Float
+	\desc Computes a 1-dimensional noise function and its derivative at a given 1d point.
+	\return Float
+		\desc The computed noise function at the input point
+	\arg x
+		\type Float
+		\desc The point to compute the noise function at
+	\arg dx
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			derivative after the function has returned
+
+
+\fn noise2
+	\obj SimplexNoise
+	\obj_template Float
+	\desc Computes a 2-dimensional noise function at a given 2d point.
+	\return Float
+		\desc The computed noise function at the input point
+	\arg x
+		\type Float
+		\desc The 1st component of the point to compute the noise function at
+	\arg y
+		\type Float
+		\desc The 2nd component of the point to compute the noise function at
+
+
+\fn noise2
+	\obj SimplexNoise
+	\obj_template Float
+	\desc Computes a 2-dimensional noise function and its partial derivatives at a given 2d point.
+	\return Float
+		\desc The computed noise function at the input point
+	\arg x
+		\type Float
+		\desc The 1st component of the point to compute the noise function at
+	\arg y
+		\type Float
+		\desc The 2nd component of the point to compute the noise function at
+	\arg dx
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to x
+	\arg dy
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to y
+
+
+\fn noise3
+	\obj SimplexNoise
+	\obj_template Float
+	\desc Computes a 3-dimensional noise function at a given 3d point.
+	\return Float
+		\desc The computed noise function at the input point
+	\arg x
+		\type Float
+		\desc The 1st component of the point to compute the noise function at
+	\arg y
+		\type Float
+		\desc The 2nd component of the point to compute the noise function at
+	\arg z
+		\type Float
+		\desc The 3rd component of the point to compute the noise function at
+
+
+\fn noise3
+	\obj SimplexNoise
+	\obj_template Float
+	\desc Computes a 3-dimensional noise function and its partial derivatives at a given 3d point.
+	\return Float
+		\desc The computed noise function at the input point
+	\arg x
+		\type Float
+		\desc The 1st component of the point to compute the noise function at
+	\arg y
+		\type Float
+		\desc The 2nd component of the point to compute the noise function at
+	\arg z
+		\type Float
+		\desc The 3rd component of the point to compute the noise function at
+	\arg dx
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to x
+	\arg dy
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to y
+	\arg dy
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to z
+
+
+\fn noise4
+	\obj SimplexNoise
+	\obj_template Float
+	\desc Computes a 4-dimensional noise function at a given 4d point.
+	\return Float
+		\desc The computed noise function at the input point
+	\arg x
+		\type Float
+		\desc The 1st component of the point to compute the noise function at
+	\arg y
+		\type Float
+		\desc The 2nd component of the point to compute the noise function at
+	\arg z
+		\type Float
+		\desc The 3rd component of the point to compute the noise function at
+	\arg z
+		\type Float
+		\desc The 4th component of the point to compute the noise function at
+
+
+\fn noise4
+	\obj SimplexNoise
+	\obj_template Float
+	\desc Computes a 3-dimensional noise function and its partial derivatives at a given 3d point.
+	\return Float
+		\desc The computed noise function at the input point
+	\arg x
+		\type Float
+		\desc The 1st component of the point to compute the noise function at
+	\arg y
+		\type Float
+		\desc The 2nd component of the point to compute the noise function at
+	\arg z
+		\type Float
+		\desc The 3rd component of the point to compute the noise function at
+	\arg w
+		\type Float
+		\desc The 4th component of the point to compute the noise function at
+	\arg dx
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to x
+	\arg dy
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to y
+	\arg dy
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to z
+	\arg dw
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to w
+
+
+\fn noise1_octaves
+	\obj SimplexNoise
+	\obj_template Float
+	\desc Computes a 1-dimensional noise function at a given 1d point.
+	\return Float
+		\desc The computed noise function at the input point
+	\arg octaves
+		\type OctavesInt
+		\desc The number of octaves to use
+	\arg x
+		\type Float
+		\desc The point to compute the noise function at
+
+
+\fn noise1_octaves
+	\obj SimplexNoise
+	\obj_template Float
+	\desc Computes a 1-dimensional noise function and its derivative at a given 1d point.
+	\return Float
+		\desc The computed noise function at the input point
+	\arg octaves
+		\type OctavesInt
+		\desc The number of octaves to use
+	\arg x
+		\type Float
+		\desc The point to compute the noise function at
+	\arg dx
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			derivative after the function has returned
+
+
+\fn noise2_octaves
+	\obj SimplexNoise
+	\obj_template Float
+	\desc Computes a 2-dimensional noise function at a given 2d point.
+	\return Float
+		\desc The computed noise function at the input point
+	\arg octaves
+		\type OctavesInt
+		\desc The number of octaves to use
+	\arg x
+		\type Float
+		\desc The 1st component of the point to compute the noise function at
+	\arg y
+		\type Float
+		\desc The 2nd component of the point to compute the noise function at
+
+
+\fn noise2_octaves
+	\obj SimplexNoise
+	\obj_template Float
+	\desc Computes a 2-dimensional noise function and its partial derivatives at a given 2d point.
+	\return Float
+		\desc The computed noise function at the input point
+	\arg octaves
+		\type OctavesInt
+		\desc The number of octaves to use
+	\arg x
+		\type Float
+		\desc The 1st component of the point to compute the noise function at
+	\arg y
+		\type Float
+		\desc The 2nd component of the point to compute the noise function at
+	\arg dx
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to x
+	\arg dy
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to y
+
+
+\fn noise3_octaves
+	\obj SimplexNoise
+	\obj_template Float
+	\desc Computes a 3-dimensional noise function at a given 3d point.
+	\return Float
+		\desc The computed noise function at the input point
+	\arg octaves
+		\type OctavesInt
+		\desc The number of octaves to use
+	\arg x
+		\type Float
+		\desc The 1st component of the point to compute the noise function at
+	\arg y
+		\type Float
+		\desc The 2nd component of the point to compute the noise function at
+	\arg z
+		\type Float
+		\desc The 3rd component of the point to compute the noise function at
+
+
+\fn noise3_octaves
+	\obj SimplexNoise
+	\obj_template Float
+	\desc Computes a 3-dimensional noise function and its partial derivatives at a given 3d point.
+	\return Float
+		\desc The computed noise function at the input point
+	\arg octaves
+		\type OctavesInt
+		\desc The number of octaves to use
+	\arg x
+		\type Float
+		\desc The 1st component of the point to compute the noise function at
+	\arg y
+		\type Float
+		\desc The 2nd component of the point to compute the noise function at
+	\arg z
+		\type Float
+		\desc The 3rd component of the point to compute the noise function at
+	\arg dx
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to x
+	\arg dy
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to y
+	\arg dy
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to z
+
+
+\fn noise4_octaves
+	\obj SimplexNoise
+	\obj_template Float
+	\desc Computes a 4-dimensional noise function at a given 4d point.
+	\return Float
+		\desc The computed noise function at the input point
+	\arg octaves
+		\type OctavesInt
+		\desc The number of octaves to use
+	\arg x
+		\type Float
+		\desc The 1st component of the point to compute the noise function at
+	\arg y
+		\type Float
+		\desc The 2nd component of the point to compute the noise function at
+	\arg z
+		\type Float
+		\desc The 3rd component of the point to compute the noise function at
+	\arg z
+		\type Float
+		\desc The 4th component of the point to compute the noise function at
+
+
+\fn noise4_octaves
+	\obj SimplexNoise
+	\obj_template Float
+	\desc Computes a 3-dimensional noise function and its partial derivatives at a given 3d point.
+	\return Float
+		\desc The computed noise function at the input point
+	\arg octaves
+		\type OctavesInt
+		\desc The number of octaves to use
+	\arg x
+		\type Float
+		\desc The 1st component of the point to compute the noise function at
+	\arg y
+		\type Float
+		\desc The 2nd component of the point to compute the noise function at
+	\arg z
+		\type Float
+		\desc The 3rd component of the point to compute the noise function at
+	\arg w
+		\type Float
+		\desc The 4th component of the point to compute the noise function at
+	\arg dx
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to x
+	\arg dy
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to y
+	\arg dy
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to z
+	\arg dw
+		\type Float*
+		\desc Pointer to a <code>Float</code> which will contain the noise function's
+			partial derivative with respect to w
+
+
+
+
+\fn noise_n
+	\obj SimplexNoise
+	\obj_template Float
+	\desc Computes a generic n-dimensional noise function given point.
+	\return Float
+		\desc The computed noise function at the input point
+	\arg maxRadius
+		\type Float
+		\desc The maximum distance squared from a simplex point that a contribution
+			can be non-zero. This corresponds to the <code>0.5</code> or <code>0.6</code>
+			values typically used in simplex noise.
+	\arg power
+		\type Float
+		\desc The exponent of the noise function's point contributions
+	\arg dimensions
+		\type int
+		\desc The number of dimensions to generate the noise in
+	\arg position
+		\type const Float*
+		\desc An array representing the input coordinate.
+			Must contain at least <code>dimensions</code> values.
+
+
